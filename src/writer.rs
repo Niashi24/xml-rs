@@ -3,13 +3,14 @@
 //! The most important type in this module is `EventWriter` which allows writing an XML document
 //! to some output stream.
 
-use no_std_io2::io::Write;
 pub use self::config::EmitterConfig;
 pub use self::emitter::EmitterError as Error;
 pub use self::emitter::Result;
 pub use self::events::XmlEvent;
 
 use self::emitter::Emitter;
+
+use std::io::prelude::*;
 
 mod config;
 mod emitter;

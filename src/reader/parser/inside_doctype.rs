@@ -1,4 +1,4 @@
-use core::fmt::Write;
+use std::fmt::Write;
 
 use crate::common::{is_name_char, is_name_start_char, is_whitespace_char};
 use crate::reader::error::SyntaxError;

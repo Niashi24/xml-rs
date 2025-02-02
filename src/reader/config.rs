@@ -1,8 +1,6 @@
 //! Contains parser configuration structure.
-
-use alloc::string::String;
-use hashbrown::HashMap;
-use no_std_io2::io::Read;
+use std::collections::HashMap;
+use std::io::Read;
 
 use crate::reader::EventReader;
 use crate::util::Encoding;

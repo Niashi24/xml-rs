@@ -1,8 +1,5 @@
 //! Contains an implementation of pull-based XML parser.
 
-use alloc::format;
-use alloc::string::{String, ToString};
-use alloc::vec::Vec;
 use crate::common::{is_xml10_char, is_xml11_char, is_xml11_char_not_restricted, is_name_char, is_name_start_char, is_whitespace_char};
 use crate::common::{Position, TextPosition, XmlVersion};
 use crate::name::OwnedName;
@@ -14,8 +11,8 @@ use crate::reader::indexset::AttributesSet;
 use crate::reader::lexer::{Lexer, Token};
 use super::{Error, ErrorKind};
 
-use hashbrown::HashMap;
-use no_std_io2::io::Read;
+use std::collections::HashMap;
+use std::io::Read;
 
 macro_rules! gen_takes(
     ($($field:ident -> $method:ident, $t:ty, $def:expr);+) => (
@@ -25,7 +22,7 @@ macro_rules! gen_takes(
             #[allow(clippy::mem_replace_option_with_none)]
             #[allow(clippy::mem_replace_with_default)]
             fn $method(&mut self) -> $t {
-                core::mem::replace(&mut self.$field, $def)
+                std::mem::replace(&mut self.$field, $def)
             }
         }
         )+
@@ -373,7 +370,7 @@ impl PullParser {
 
     /// Handle end of stream
     #[cold]
-    fn handle_eof(&mut self) -> core::result::Result<XmlEvent, super::Error> {
+    fn handle_eof(&mut self) -> std::result::Result<XmlEvent, super::Error> {
         let ev = if self.depth() == 0 {
             if self.encountered == Encountered::Element && self.st == State::OutsideTag {  // all is ok
                 Ok(XmlEvent::EndDocument)
@@ -464,7 +461,7 @@ impl PullParser {
 
     #[inline]
     fn take_buf(&mut self) -> String {
-        core::mem::take(&mut self.buf)
+        std::mem::take(&mut self.buf)
     }
 
     #[inline]
@@ -679,7 +676,7 @@ mod tests {
     use crate::reader::events::XmlEvent;
     use crate::reader::parser::PullParser;
     use crate::reader::ParserConfig;
-    use no_std_io2::io::BufReader;
+    use std::io::BufReader;
 
     fn new_parser() -> PullParser {
         PullParser::new(ParserConfig::new())
@@ -703,7 +700,7 @@ mod tests {
     macro_rules! test_data(
         ($d:expr) => ({
             static DATA: &'static str = $d;
-            let r = BufReader::<_, 8000>::new(DATA.as_bytes());
+            let r = BufReader::new(DATA.as_bytes());
             let p = new_parser();
             (r, p)
         })
@@ -809,7 +806,7 @@ mod tests {
 
     #[test]
     fn state_size() {
-        assert_eq!(2, core::mem::size_of::<super::State>());
-        assert_eq!(1, core::mem::size_of::<super::DoctypeSubstate>());
+        assert_eq!(2, std::mem::size_of::<super::State>());
+        assert_eq!(1, std::mem::size_of::<super::DoctypeSubstate>());
     }
 }

@@ -1,8 +1,8 @@
 //! Contains emitter configuration structure.
 
 use crate::writer::EventWriter;
-use alloc::borrow::Cow;
-use no_std_io2::io::Write;
+use std::borrow::Cow;
+use std::io::Write;
 
 /// Emitter configuration structure.
 ///

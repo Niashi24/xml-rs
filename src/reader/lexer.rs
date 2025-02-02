@@ -6,10 +6,9 @@ use crate::common::{is_name_char, is_whitespace_char, is_xml10_char, is_xml11_ch
 use crate::reader::error::SyntaxError;
 use crate::reader::{Error, ErrorKind};
 use crate::util::{CharReader, Encoding};
-use alloc::collections::VecDeque;
-use alloc::string::String;
-use no_std_io2::io::Read;
-use core::{fmt, result};
+use std::collections::VecDeque;
+use std::io::Read;
+use std::{fmt, result};
 
 use super::ParserConfig2;
 
@@ -645,10 +644,8 @@ impl Lexer {
 
 #[cfg(test)]
 mod tests {
-    use alloc::borrow::ToOwned;
-    use alloc::vec::Vec;
-    use no_std_io2::io::{BufReader, Cursor};
     use crate::{common::Position, reader::ParserConfig2};
+    use std::io::{BufReader, Cursor};
 
     use super::{Lexer, Token};
 
@@ -676,7 +673,7 @@ mod tests {
         )
     );
 
-    fn make_lex_and_buf(s: &str) -> (Lexer, BufReader<Cursor<Vec<u8>>, 8000>) {
+    fn make_lex_and_buf(s: &str) -> (Lexer, BufReader<Cursor<Vec<u8>>>) {
         (Lexer::new(&ParserConfig2::default()), BufReader::new(Cursor::new(s.to_owned().into_bytes())))
     }
 
@@ -1110,8 +1107,8 @@ mod tests {
 
     #[test]
     fn token_size() {
-        assert_eq!(4, core::mem::size_of::<Token>());
-        assert_eq!(2, core::mem::size_of::<super::State>());
+        assert_eq!(4, std::mem::size_of::<Token>());
+        assert_eq!(2, std::mem::size_of::<super::State>());
     }
 
     #[test]

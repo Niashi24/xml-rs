@@ -1,13 +1,10 @@
 //! Contains `XmlEvent` datatype, instances of which are emitted by the parser.
 
-use alloc::format;
-use alloc::string::String;
-use alloc::vec::Vec;
 use crate::attribute::OwnedAttribute;
 use crate::common::XmlVersion;
 use crate::name::OwnedName;
 use crate::namespace::Namespace;
-use core::fmt;
+use std::fmt;
 
 /// An element of an XML input stream.
 ///

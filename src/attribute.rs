@@ -1,7 +1,6 @@
 //! Contains XML attributes manipulation types and functions.
 
-use alloc::string::String;
-use core::fmt;
+use std::fmt;
 
 use crate::escape::{AttributeEscapes, Escaped};
 use crate::name::{Name, OwnedName};
@@ -81,7 +80,6 @@ impl fmt::Display for OwnedAttribute {
 
 #[cfg(test)]
 mod tests {
-    use alloc::string::ToString;
     use super::Attribute;
 
     use crate::name::Name;

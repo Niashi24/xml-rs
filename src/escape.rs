@@ -1,9 +1,8 @@
 //! Contains functions for performing XML special characters escaping.
 
-use alloc::borrow::Cow;
-use alloc::string::ToString;
-use core::fmt::{Display, Formatter, Result};
-use core::marker::PhantomData;
+use std::borrow::Cow;
+use std::fmt::{Display, Formatter, Result};
+use std::marker::PhantomData;
 
 pub(crate) trait Escapes {
     fn escape(c: u8) -> Option<&'static str>;

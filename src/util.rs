@@ -1,6 +1,6 @@
-use core::fmt;
-use no_std_io2::io::{self, Read};
-use core::str::{self, FromStr};
+use std::fmt;
+use std::io::{self, Read};
+use std::str::{self, FromStr};
 
 #[derive(Debug)]
 pub enum CharReadError {
@@ -217,12 +217,11 @@ impl CharReader {
 
 #[cfg(test)]
 mod tests {
-    use alloc::string::ToString;
     use super::{CharReadError, CharReader, Encoding};
 
     #[test]
     fn test_next_char_from() {
-        use no_std_io2::io;
+        use std::io;
 
         let mut bytes: &[u8] = b"correct";    // correct ASCII
         assert_eq!(CharReader::new().next_char_from(&mut bytes).unwrap(), Some('c'));
