@@ -1,9 +1,13 @@
 use crate::reader::lexer::Token;
 use crate::Encoding;
 
-use std::borrow::Cow;
-use std::error::Error as _;
-use std::{error, fmt, io, str};
+use alloc::borrow::Cow;
+use alloc::boxed::Box;
+use alloc::format;
+use alloc::string::ToString;
+use core::error::Error as _;
+use core::{error, fmt, str};
+use no_std_io2::io;
 
 use crate::common::{Position, TextPosition};
 use crate::util;
@@ -251,5 +255,5 @@ impl Eq for ErrorKind {}
 
 #[test]
 fn err_size() {
-    assert!(std::mem::size_of::<SyntaxError>() <= 24);
+    assert!(core::mem::size_of::<SyntaxError>() <= 24);
 }

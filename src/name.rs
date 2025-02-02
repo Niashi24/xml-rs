@@ -1,7 +1,8 @@
 //! Contains XML qualified names manipulation types and functions.
 
-use std::fmt;
-use std::str::FromStr;
+use alloc::string::{String, ToString};
+use core::fmt;
+use core::str::FromStr;
 
 use crate::namespace::NS_NO_PREFIX;
 
@@ -91,8 +92,8 @@ impl<'a> Name<'a> {
     pub fn to_owned(&self) -> OwnedName {
         OwnedName {
             local_name: self.local_name.into(),
-            namespace: self.namespace.map(std::convert::Into::into),
-            prefix: self.prefix.map(std::convert::Into::into),
+            namespace: self.namespace.map(core::convert::Into::into),
+            prefix: self.prefix.map(core::convert::Into::into),
         }
     }
 
@@ -224,7 +225,7 @@ impl OwnedName {
         Self {
             local_name: local_name.into(),
             namespace: Some(namespace.into()),
-            prefix: prefix.map(std::convert::Into::into),
+            prefix: prefix.map(core::convert::Into::into),
         }
     }
 

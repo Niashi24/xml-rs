@@ -1,7 +1,8 @@
 //! Contains `XmlEvent` datatype, instances of which are consumed by the writer.
 
-use std::borrow::Cow;
-
+use alloc::borrow::Cow;
+use alloc::string::String;
+use alloc::vec::Vec;
 use crate::attribute::Attribute;
 use crate::common::XmlVersion;
 use crate::name::Name;

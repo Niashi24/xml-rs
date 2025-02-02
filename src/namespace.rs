@@ -1,11 +1,13 @@
 //! Contains namespace manipulation types and functions.
 
-use std::borrow::Cow;
-use std::collections::btree_map::Iter as Entries;
-use std::collections::btree_map::{BTreeMap, Entry};
-use std::collections::HashSet;
-use std::iter::{Map, Rev};
-use std::slice::Iter;
+use alloc::borrow::Cow;
+use alloc::collections::btree_map::Iter as Entries;
+use alloc::collections::btree_map::{BTreeMap, Entry};
+use alloc::string::String;
+use alloc::vec::Vec;
+use hashbrown::HashSet;
+use core::iter::{Map, Rev};
+use core::slice::Iter;
 
 /// Designates prefix for namespace definitions.
 ///

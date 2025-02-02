@@ -3,9 +3,9 @@
 //! The most important type in this module is `EventReader`, which provides an iterator
 //! view for events in XML document.
 
-use std::io::Read;
-use std::iter::FusedIterator;
-use std::result;
+use no_std_io2::io::Read;
+use core::iter::FusedIterator;
+use core::result;
 
 use crate::common::{Position, TextPosition};
 

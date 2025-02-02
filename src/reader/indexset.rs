@@ -1,17 +1,17 @@
+use alloc::format;
+use alloc::string::String;
+use alloc::vec::Vec;
+use hashbrown::{DefaultHashBuilder, HashSet};
 use crate::attribute::OwnedAttribute;
 use crate::name::OwnedName;
 
-use std::collections::hash_map::RandomState;
-use std::collections::HashSet;
-use std::hash::{BuildHasher, Hash, Hasher};
+use core::hash::{BuildHasher, Hash, Hasher};
 
 /// An ordered set
 pub struct AttributesSet {
     vec: Vec<OwnedAttribute>,
     /// Uses a no-op hasher, because these u64s are hashes already
     may_contain: HashSet<u64, U64HasherBuilder>,
-    /// This is real hasher for the `OwnedName`
-    hasher: RandomState,
 }
 
 /// Use linear search and don't allocate `HashSet` if there are few attributes,
@@ -22,13 +22,12 @@ impl AttributesSet {
     pub fn new() -> Self {
         Self {
             vec: Vec::new(),
-            hasher: RandomState::new(),
             may_contain: HashSet::default(),
         }
     }
 
     fn hash(&self, val: &OwnedName) -> u64 {
-        let mut h = self.hasher.build_hasher();
+        let mut h = DefaultHashBuilder::default().build_hasher();
         val.hash(&mut h);
         h.finish()
     }

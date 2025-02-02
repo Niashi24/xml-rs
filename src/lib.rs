@@ -1,3 +1,4 @@
+#![no_std]
 #![warn(missing_docs)]
 #![forbid(non_camel_case_types)]
 #![forbid(unsafe_code)]
@@ -10,6 +11,7 @@
 //! If a panic could cause a Denial Of Service in your codebase, *you're* responsible for wrapping access to this library in `catch_unwind`.
 
 #![cfg_attr(doctest, doc = include_str!("../README.md"))]
+extern crate alloc;
 
 pub use crate::reader::{EventReader, ParserConfig};
 pub use crate::util::Encoding;

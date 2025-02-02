@@ -2,7 +2,7 @@ use super::{PullParser, Result, State};
 use crate::common::{is_name_char, is_name_start_char, is_whitespace_char};
 use crate::reader::error::SyntaxError;
 use crate::reader::lexer::Token;
-use std::char;
+use core::char;
 
 impl PullParser {
     pub fn inside_reference(&mut self, t: Token) -> Option<Result> {
@@ -60,7 +60,7 @@ impl PullParser {
         }
     }
 
-    pub(crate) fn numeric_reference_from_str(&self, num_str: &str) -> std::result::Result<char, SyntaxError> {
+    pub(crate) fn numeric_reference_from_str(&self, num_str: &str) -> core::result::Result<char, SyntaxError> {
         let val = if let Some(hex) = num_str.strip_prefix('x') {
             u32::from_str_radix(hex, 16).map_err(move |_| SyntaxError::InvalidNumericEntity(num_str.into()))?
         } else {

@@ -1,7 +1,8 @@
-use std::error::Error;
-use std::io::prelude::*;
-use std::{fmt, io, result};
-
+use alloc::vec::Vec;
+use core::error::Error;
+use core::{fmt, result};
+use no_std_io2::io;
+use no_std_io2::io::Write;
 use crate::attribute::Attribute;
 use crate::common;
 use crate::common::XmlVersion;
